@@ -46,16 +46,16 @@ $(document).ready(function () {
         clearInterval(timerID);
       }
       else if (second < 10)
-        $('span').html('00:0' + second)
+        span.html('00:0' + second)
       else
-        $('span').html('00:' + second)
+        span.html('00:' + second)
     }, 1000)
   }
   function timerEnd() {
     second = -1;
     clearInterval(timerID);
     $('.btn-start').prop('disabled', false);
-    $('span').html('01:00');
+    span.html('01:00');
   }
 
   //show/hide hint functions
@@ -130,6 +130,7 @@ $(document).ready(function () {
   let checkGame;
   let hintTimer;
   let second = -1;
+  let span = $('span:not(#warning-container)');
 
   newGame();
 
