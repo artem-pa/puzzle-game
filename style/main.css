@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+.timer {
+  margin: 50px 0;
+  text-align: center;
+  font-size: 75px;
+}
+
+.btn-block {
+  width: 450px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  position: relative;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: crimson;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: tomato;
+}
+
+.btn:active {
+  outline: 3px solid #dc143cd0;
+}
+
+.btn:disabled {
+  background-color: #d45871;
+  cursor: auto;
+}
+
+.hint {
+  width: 43px;
+  height: 43px;
+  border: none;
+  background-color: #eee;
+  outline: 2px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  right: -60px;
+  font-size: 40px;
+  color: #999;
+  cursor: pointer;
+}
+
+.hint-active {
+  color: #1919151a;
+  cursor: auto;
+  outline: 2px solid yellow;
+  text-shadow: 0 0 5px yellow;
+}
+
+.playground {
+  width: 1000px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  width: 400px;
+  height: 400px;
+  background-color: #ccc;
+  outline: 1px solid #000;
+  box-shadow: 0 0 20px 0 #333;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: start;
+}
+
+.part-container {
+  width: 100px;
+  height: 100px;
+}
+
+.part {
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  background: url(../images/ori.png);
+  background-size: 400%;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: #fff0;
+  text-shadow: 0 0 5px #0000;
+  cursor: grab;
+}
+
+.ui-sortable-placeholder {
+  visibility: initial !important;
+  opacity: 0.2;
+}
+
+.ui-sortable-helper {
+  cursor: grabbing;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #666d;
+  opacity: 0;
+  z-index: -1;
+}
+
+.modal-container {
+  width: 700px;
+  padding: 50px 0 0;
+  background-color: #fff;
+  border-radius: 20px;
+  position: absolute;
+  top: 10xp;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.modal hr {
+  border: 1px solid #ccc;
+}
+
+.modal-text {
+  padding: 10px;
+  text-align: center;
+  font-size: 40px;
+}
+
+.modal-btns {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.modal-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal-btn:active {
+  filter: hue-rotate(45deg)
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}

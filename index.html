@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style/main.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <p class="timer"><span>01:00</span></p>
+
+  <div class="btn-block">
+    <button class="btn btn-start">Start game!</button>
+    <button class="btn btn-check">Check result</button>
+    <button class="btn btn-new">New game</button>
+    <button class="hint">
+      <i class="far fa-lightbulb"></i>
+    </button>
+  </div>
+
+  <div class="playground">
+    <div id="start" class="box">
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+      <div class="part"></div>
+    </div>
+    <div id="end" class="box"></div>
+  </div>
+
+  <div class="modal">
+    <div class="modal-container">
+      <hr>
+      <p class="modal-text">It's a pity, but you lost</p>
+      <hr>
+      <div class="modal-btns">
+        <button class="modal-btn modal-end red">Close</button>
+        <button class="modal-btn modal-close red">Close</button>
+        <button class="modal-btn modal-check green">Check</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://kit.fontawesome.com/b44a9c123e.js" crossorigin="anonymous"></script>
+  <script src="scripts/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <script src="scripts/script.js"></script>
+</body>
+
+</html>
