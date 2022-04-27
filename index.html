@@ -5,17 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style/main.css">
-  <title>Document</title>
+  <title>Puzzle Game</title>
 </head>
 
 <body>
-  <p class="timer"><span>01:00</span></p>
+  <p class="timer"><span class="time">01:00</span></p>
 
   <div class="btn-block">
     <button class="btn btn-start">Start game!</button>
     <button class="btn btn-check">Check result</button>
     <button class="btn btn-new">New game</button>
-    <button class="hint">
+    <button class="hint" title="Hint!">
       <i class="far fa-lightbulb"></i>
     </button>
   </div>
@@ -45,7 +45,7 @@
   <div class="modal">
     <div class="modal-container">
       <hr>
-      <p class="modal-text">It's a pity, but you lost</p>
+      <p class="modal-text">_placeholder_ <span class="time"></span> </p>
       <hr>
       <div class="modal-btns">
         <button class="modal-btn modal-end red">Close</button>
@@ -57,7 +57,7 @@
 
   <script src="https://kit.fontawesome.com/b44a9c123e.js" crossorigin="anonymous"></script>
   <script src="scripts/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <script src="scripts/jquery-ui.min.js"></script>
   <script src="scripts/script.js"></script>
 </body>
 

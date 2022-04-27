@@ -77,8 +77,9 @@ body {
   width: 400px;
   height: 400px;
   background-color: #ccc;
-  outline: 1px solid #000;
-  box-shadow: 0 0 20px 0 #333;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 20px 3px #333;
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;

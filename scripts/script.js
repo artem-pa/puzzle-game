@@ -26,7 +26,6 @@ $(document).ready(function () {
     let ind = rand(x);
     let index = arr[ind];
     let row = Math.floor(index / 4);
-    // $('#start').append(`<div class='part' id='${index}'>${index}</p>`);
     $('#start').append(`<div class='part' id='${index}'></p>`);
     $(`#${index}`).css('background-position', `${(index - row * 4) * 33.3333}% ${row * 33.3333}%`);
     arr.splice(ind, 1);
@@ -35,41 +34,43 @@ $(document).ready(function () {
 
   //main timer start/end functions
   function timerStart() {
-    second = 60;
+    second = 10;
     $('.btn-check').prop('disabled', false);
     clearInterval(checkGame);
     timerID = setInterval(function () {
       $('.btn-start').prop('disabled', true);
       second--;
       if (second < 0) {
-        showModal(`It's a pity, but you lost`);
+        check(timeOverMsg);
         clearInterval(timerID);
       }
       else if (second < 10)
-        span.html('00:0' + second)
+        time = '00:0' + second;
       else
-        span.html('00:' + second)
+        time = '00:' + second;
+        $('span.time').text(time);
     }, 1000)
   }
   function timerEnd() {
     second = -1;
+    time = '01:00';
     clearInterval(timerID);
     $('.btn-start').prop('disabled', false);
-    span.html('01:00');
+    $('span.time').text(time);
   }
 
   //show/hide hint functions
   function showHint() {
     $(this).prop('disabled', true);
-
     $('.part')
       .each(function () {
-        $(this).text($(this).attr('id'))
+        $(this).text(parseInt($(this).attr('id')) + 1)
       })
       .animate({ color: '#fff', }, 500)
       .css('text-shadow', '0 0 5px #000')
-    $('.hint').addClass('hint-active', 500)
-    $('.hint').off('click')
+    $('.hint')
+    .addClass('hint-active', 500)
+    .off('click')
     hintTimer = setTimeout(hideHint, 10000)
   }
   function hideHint() {
@@ -79,8 +80,10 @@ $(document).ready(function () {
       .empty()
       .css('text-shadow', '0 0 5px #0000')
       .animate({ color: '#fff0', }, 500)
-    $('.hint').removeClass('hint-active', 500)
-    $('.hint').on('click', showHint)
+
+    $('.hint')
+      .removeClass('hint-active', 500)
+      .on('click', showHint)
   }
 
   //modal window functions
@@ -110,7 +113,7 @@ $(document).ready(function () {
   }
 
   //checking player's solution
-  function check() {
+  function check(text) {
     let parts = $('#end .part');
     let isValid = true;
     if (parts.length < 16) isValid = false;
@@ -119,7 +122,7 @@ $(document).ready(function () {
         if (i != parts.eq(i).attr('id')) isValid = false;
       }
     timerEnd();
-    showModal(isValid ? (`Woohoo, well done, you did it!`) : (`It's a pity, but you lost`));
+    showModal(isValid ? text.win : text.lose);
   }
 
   ///////////////
@@ -130,7 +133,15 @@ $(document).ready(function () {
   let checkGame;
   let hintTimer;
   let second = -1;
-  let span = $('span:not(#warning-container)');
+  let time = '01:00';
+  const afterGameMsg = {
+    win: 'Congradulations, you did it!',
+    lose: 'Sorry, but you lost'
+  };
+  const timeOverMsg = {
+    win: 'So close, but you won!',
+    lose: 'Game over, time out'
+  }
 
   newGame();
 
@@ -141,7 +152,7 @@ $(document).ready(function () {
 
   $('.btn-start').on('click', timerStart);
 
-  $('.btn-check').on('click', () => showModal('You still have time, you sure? <span>00:00</span>', true));
+  $('.btn-check').on('click', () => showModal(`You still have time, you sure? <span class="time">${time}</span>`, true));
 
   $('.btn-new').on('click', () => newGame());
 
@@ -149,7 +160,7 @@ $(document).ready(function () {
 
   $('.modal-close').on('click', closeModal);
 
-  $('.modal-check').on('click', check);
+  $('.modal-check').on('click', () => check(afterGameMsg));
 
   $('.modal-end').on('click', endGame);
 })
