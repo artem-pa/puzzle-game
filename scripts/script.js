@@ -34,7 +34,7 @@ $(document).ready(function () {
 
   //main timer start/end functions
   function timerStart() {
-    second = 10;
+    second = 60;
     $('.btn-check').prop('disabled', false);
     clearInterval(checkGame);
     timerID = setInterval(function () {
