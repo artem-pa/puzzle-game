@@ -9,16 +9,33 @@ $(document).ready(function () {
   // start game and randomize part of picture
   function newGame(x = 15, arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]) {
     if (x < 0) {
+      $('.box .part').draggable({
+        revert: 'invalid',
+        revertDuration: 300,
+        zIndex: 20,
+        helper: 'clone',
+        start: function () {
+          $(this).css({opacity: '0'});
+          if ($(this).parent().attr('id') !== $('#start').attr('id')) {
+            $(this).parent().droppable('option', 'scope', 'default');
+          }
+          drag = this;
+        },
+        stop: function () {
+          $(this).css({opacity: '1'});
+        }
+      })
       return;
     }
     if (x === 15) {
       timerEnd();
       hideHint();
       $('.btn-check').prop('disabled', true);
-      $('.box').empty();
+      $('#start').empty();
+      $('#end .cell').empty();
 
       checkGame = setInterval(function () {
-        if ($('.ui-sortable-placeholder').length && second === -1) {
+        if ($('.ui-draggable-dragging').length && second === -1) {
           timerStart();
         }
       }, 50)
@@ -34,13 +51,15 @@ $(document).ready(function () {
 
   //main timer start/end functions
   function timerStart() {
-    second = 10;
+    second = 60;
+    $('#end .cell').droppable('option', 'scope', 'default');
     $('.btn-check').prop('disabled', false);
     clearInterval(checkGame);
     timerID = setInterval(function () {
       $('.btn-start').prop('disabled', true);
       second--;
       if (second < 0) {
+        $('.box .part').draggable( 'destroy' );
         check(timeOverMsg);
         clearInterval(timerID);
       }
@@ -48,7 +67,7 @@ $(document).ready(function () {
         time = '00:0' + second;
       else
         time = '00:' + second;
-        $('span.time').text(time);
+      $('span.time').text(time);
     }, 1000)
   }
   function timerEnd() {
@@ -57,6 +76,7 @@ $(document).ready(function () {
     clearInterval(timerID);
     $('.btn-start').prop('disabled', false);
     $('span.time').text(time);
+
   }
 
   //show/hide hint functions
@@ -69,8 +89,8 @@ $(document).ready(function () {
       .animate({ color: '#fff', }, 500)
       .css('text-shadow', '0 0 5px #000')
     $('.hint')
-    .addClass('hint-active', 500)
-    .off('click')
+      .addClass('hint-active', 500)
+      .off('click')
     hintTimer = setTimeout(hideHint, 10000)
   }
   function hideHint() {
@@ -129,6 +149,7 @@ $(document).ready(function () {
   // MAIN CODE //
   ///////////////
 
+  let drag;
   let timerID;
   let checkGame;
   let hintTimer;
@@ -145,9 +166,32 @@ $(document).ready(function () {
 
   newGame();
 
-  $('.box').sortable({
-    connectWith: '#start, #end',
+  $('#start').droppable({
+    accept: function (element) {
+      if (element.parent().attr('id') !== 'start')
+        return true;
+    },
+    drop: function () {
+      drag.remove();
+      $(drag).css({ top: '0', left: '0' });
+      this.append(drag);
+      console.log(drag);
+    },
   })
+
+  $('#end .cell').droppable({
+    drop: function () {
+      $(this).droppable('option', 'scope', 'none');
+      drag.remove();
+      $(drag).css({ top: '0', left: '0' });
+      this.append(drag);
+    },
+    classes: {
+      "ui-droppable-hover": "ui-state-hover",
+    },
+    scope: 'default',
+  })
+  
   $('.part').disableSelection();
 
   $('.btn-start').on('click', timerStart);
