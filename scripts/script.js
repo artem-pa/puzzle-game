@@ -52,7 +52,6 @@ $(document).ready(function () {
   //main timer start/end functions
   function timerStart() {
     second = 60;
-    $('#end .cell').droppable('option', 'scope', 'default');
     $('.btn-check').prop('disabled', false);
     clearInterval(checkGame);
     timerID = setInterval(function () {
@@ -191,7 +190,7 @@ $(document).ready(function () {
     },
     scope: 'default',
   })
-  
+
   $('.part').disableSelection();
 
   $('.btn-start').on('click', timerStart);
